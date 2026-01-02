@@ -1,13 +1,26 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Heebo";
+  src: url("/public/fonts/heebo-v28-latin-500.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "Heebo";
+  src: url("/public/fonts/heebo-v28-latin-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Heebo";
+  src: url("/public/fonts/heebo-v28-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+body {
+  font-family: "Heebo", sans-serif;
 }

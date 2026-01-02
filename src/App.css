@@ -1,38 +1,57 @@
-.App {
-  text-align: center;
+.banner-main {
+  position: relative;
+  overflow: hidden;
+  z-index: -1;
 }
 
-.App-logo {
-  height: 40vmin;
+.banner-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("./images/banner/1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.banner-bg-layer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  height: 40vh;
+  background-repeat: no-repeat;
+  background-image: url("./images/banner/2.png");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: contain;
   pointer-events: none;
+  z-index: 10;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.banner-bg-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #032b66;
+  opacity: 0.8;
+  z-index: 11;
+}
+.visa-category-layer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: url("./images/cards/shape-5.png");
+
+  background-position: right bottom;
+  background-size: cover;
+  pointer-events: none;
+  z-index: -999999;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
