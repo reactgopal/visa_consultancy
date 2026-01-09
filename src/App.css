@@ -1,7 +1,6 @@
 .banner-main {
   position: relative;
   overflow: hidden;
-  z-index: -1;
 }
 
 .banner-bg-image {
@@ -21,6 +20,7 @@
   position: absolute;
   right: 0;
   bottom: 0;
+  bottom: -1px;
   width: 40%;
   height: 40vh;
   background-repeat: no-repeat;
@@ -54,4 +54,3 @@
   pointer-events: none;
   z-index: -999999;
 }
-

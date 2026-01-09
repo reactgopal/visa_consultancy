@@ -7,13 +7,42 @@ const HeaderDesktop = ({ menuItems }) => {
       <nav className="hidden xl:block">
         <ul className="flex items-center gap-8 font-medium text-blue-900">
           {menuItems.map((item) => (
-            <li key={item.title} className="py-7">
+            <li key={item.title} className="relative py-7 group">
               <Link
                 to={item.path}
                 className="hover:text-blue-600 transition-colors text-base"
               >
                 {item.title}
               </Link>
+              {/* submenu   */}
+              {item.submenu && (
+                <ul
+                  className="
+                    absolute left-0 top-full mt-2 w-56
+                    bg-white border border-gray-200 rounded-xl shadow-lg
+                    opacity-0 invisible
+                    group-hover:opacity-100 group-hover:visible
+                    transition-all duration-200 ease-out
+                    translate-y-2 group-hover:translate-y-0
+                    z-50
+                  "
+                >
+                  {item.submenu.map((subItem) => (
+                    <li key={subItem.title}>
+                      <Link
+                        to={subItem.path}
+                        className="
+                          block px-5 py-3 text-sm text-gray-700
+                          hover:bg-blue-50 hover:text-blue-600
+                          transition-colors rounded-xl
+                        "
+                      >
+                        {subItem.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>

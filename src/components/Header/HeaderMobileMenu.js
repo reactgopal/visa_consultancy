@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const HeaderMobileMenu = ({ openMenu, onClose, menuItems, setOpenMenu }) => {
+  const [openSubmenu, setOpenSubmenu] = useState(null);
+
+  const toggleSubmenu = (title) => {
+    setOpenSubmenu(openSubmenu === title ? null : title);
+  };
+
   return (
     <>
       {/* Backdrop */}
@@ -13,7 +20,8 @@ const HeaderMobileMenu = ({ openMenu, onClose, menuItems, setOpenMenu }) => {
 
       {/* Sidebar */}
       <aside
-        className={`xl:hidden fixed top-0 right-0 z-50 w-80 max-w-full h-screen bg-white shadow-2xl border-l overflow-y-auto transform transition-transform duration-300 ease-in-out
+        className={`xl:hidden fixed top-0 right-0 z-50 w-80 max-w-full h-screen bg-white shadow-2xl border-l overflow-y-auto
+        transform transition-transform duration-300 ease-in-out
         ${openMenu ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* Close Button */}
@@ -38,18 +46,59 @@ const HeaderMobileMenu = ({ openMenu, onClose, menuItems, setOpenMenu }) => {
         </div>
 
         {/* Menu */}
-        <ul className="px-6 space-y-5 text-gray-700 font-medium">
+        <ul className="px-6 space-y-4 text-gray-700 font-medium">
           {menuItems.map((item) => (
             <li key={item.title}>
-              <Link
-                to={item.path}
-                onClick={onClose}
-                className="block py-2 border-b border-gray-100
-                hover:text-blue-600 hover:pl-2
-                transition-all duration-200"
+              {/* Parent Item */}
+              <div
+                className="flex items-center justify-between py-3 border-b border-gray-100 cursor-pointer"
+                onClick={() =>
+                  item.submenu ? toggleSubmenu(item.title) : onClose()
+                }
               >
-                {item.title}
-              </Link>
+                <Link
+                  to={item.path}
+                  onClick={!item.submenu ? onClose : undefined}
+                  className="flex-1 hover:text-blue-600 transition"
+                >
+                  {item.title}
+                </Link>
+
+                {item.submenu && (
+                  <span
+                    className={`ml-2 transition-transform duration-200
+                    ${openSubmenu === item.title ? "rotate-180" : ""}`}
+                  >
+                    ▾
+                  </span>
+                )}
+              </div>
+
+              {/* Submenu */}
+              {item.submenu && (
+                <ul
+                  className={`pl-4 overflow-hidden transition-all duration-300
+                  ${
+                    openSubmenu === item.title
+                      ? "max-h-96 opacity-100"
+                      : "max-h-0 opacity-0"
+                  }`}
+                >
+                  {item.submenu.map((subItem) => (
+                    <li key={subItem.title}>
+                      <Link
+                        to={subItem.path}
+                        onClick={onClose}
+                        className="block py-2 text-sm text-gray-600
+                        hover:text-blue-600 hover:pl-2
+                        transition-all duration-200"
+                      >
+                        {subItem.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>

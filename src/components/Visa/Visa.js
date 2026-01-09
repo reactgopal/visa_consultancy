@@ -1,84 +1,39 @@
-import React from "react";
 import VisaEnquiryForm from "./VisaEnquiryForm";
 import PageBanner from "../PageBanner/PageBanner";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Visa = () => {
-  const visaData = {
-    title: "Student Visa Guide",
-    overview:
-      "Comprehensive guide to obtaining a student visa for international education.",
-    sections: [
-      {
-        id: 1,
-        title: "Eligibility Requirements",
-        content:
-          "To be eligible for a student visa, you must have an acceptance letter from a recognized educational institution, proof of financial support, and a valid passport.To be eligible for a student visa, you must have an acceptance letter from a recognized educational institution, proof of financial support, and a valid passport.To be eligible for a student visa, you must have an acceptance letter from a recognized educational institution, proof of financial support, and a valid passport.",
-        points: [
-          "Valid acceptance from accredited institution",
-          "Proof of financial capacity",
-          "Valid passport (minimum 6 months validity)",
-          "Health insurance coverage",
-          "No criminal records",
-        ],
-      },
-      {
-        id: 2,
-        title: "Required Documents",
-        content: "Prepare the following documents for your visa application:",
-        points: [
-          "Completed visa application form",
-          "Passport and copies",
-          "Acceptance letter from institution",
-          "Bank statements (last 6 months)",
-          "Proof of accommodation",
-          "Travel insurance certificate",
-          "Medical examination report",
-        ],
-      },
-      {
-        id: 3,
-        title: "Application Process",
-        content: "Follow these steps to apply for your student visa:",
-        steps: [
-          "Gather all required documents",
-          "Schedule a visa interview appointment",
-          "Attend biometric appointment",
-          "Submit complete application",
-          "Attend visa interview",
-          "Await visa decision",
-          "Collect visa upon approval",
-        ],
-      },
-      {
-        id: 4,
-        title: "Processing Time & Fees",
-        content: "Standard processing time and associated fees:",
-        details: {
-          processing: "15-30 business days",
-          expedited: "5-10 business days",
-          fee: "$150 - $300 USD",
-          refundable: "No",
-        },
-      },
-      {
-        id: 5,
-        title: "Visa Validity & Conditions",
-        content: "Important information about visa validity period:",
-        points: [
-          "Visa validity: 1-5 years (varies by country)",
-          "Must maintain full-time enrollment",
-          "Allowed to work part-time (20 hrs/week during studies)",
-          "Full-time work allowed during breaks",
-          "Must exit country before expiration",
-        ],
-      },
-    ],
+  const { id } = useParams();
+  const [visaDetails, setVisaDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `http://192.168.100.11:8008/api/visa-category-details/${id}`
+      );
+      setVisaDetails(response?.data.data);
+      setLoading(false);
+    } catch (err) {
+      setError(err);
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="">
       <div className="max-w-full">
-        <PageBanner title={"Kickstart Your Visa ApprovalWith 4 Easy Steps"} />
+        <PageBanner title={visaDetails?.title} />
       </div>
       <div className="max-w-8xl mx-auto px-6 py-16">
         <div className="flex flex-col lg:flex-row gap-6">
@@ -88,25 +43,68 @@ const Visa = () => {
               {/* Header */}
               <div className="mb-8">
                 <h1 className="text-4xl font-bold text-gray-800 mb-3">
-                  {visaData.title}
+                  {visaDetails?.title}
                 </h1>
-                <p className="text-lg text-gray-600">{visaData.overview}</p>
+                <p
+                  className="text-lg text-gray-600"
+                  dangerouslySetInnerHTML={{
+                    __html: visaDetails.description,
+                  }}
+                ></p>
+                {/* image */}
+                <div className="my-6">
+                  <img
+                    src={visaDetails?.image}
+                    alt={visaDetails?.title}
+                    className="w-full h-64 object-cover rounded"
+                  />
+                </div>
               </div>
 
               {/* Sections */}
               <div className="space-y-8">
-                {visaData.sections.map((section) => (
+                {/* section title list show */}
+                {visaDetails.sub_category.length > 0 && (
+                  <div className="mb-12 bg-gradient-to-br from-brand-50 to-white border border-brand-200 rounded-2xl p-8">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-8">
+                      Most Common Types of {visaDetails?.title}
+                    </h2>
+
+                    <div className="space-y-6">
+                      {visaDetails.sub_category.map((section, index) => (
+                        <Link
+                          key={section.id}
+                          to={`/visa/${section.id}`}
+                          className="group flex items-start gap-4"
+                        >
+                          {/* Step circle */}
+                          <span className="w-10 h-10 flex items-center justify-center rounded-full bg-brand-600 text-white font-semibold shadow">
+                            {index + 1}
+                          </span>
+
+                          <div className="pb-6 border-b border-gray-200 group-hover:border-brand-600 transition">
+                            <p className="text-lg font-medium text-gray-800 group-hover:text-brand-600">
+                              {section.title}
+                            </p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* {visaDetails?.sub_category?.map((section) => (
                   <div
                     key={section.id}
                     className="border-l-2 border-blue-500 pl-6 pb-8"
                   >
                     <h2 className="text-2xl font-bold text-gray-800 mb-3">
-                      {section.title}
+                      {section?.title}
                     </h2>
-                    <p className="text-gray-700 mb-4">{section.content}</p>
+                    <p className="text-gray-700 mb-4">{section?.description}</p> */}
 
-                    {/* Points List */}
-                    {section.points && (
+                {/* Points List */}
+                {/* {section?.points && (
                       <ul className="space-y-2 ml-4">
                         {section.points.map((point, idx) => (
                           <li
@@ -118,10 +116,10 @@ const Visa = () => {
                           </li>
                         ))}
                       </ul>
-                    )}
+                    )} */}
 
-                    {/* Steps List */}
-                    {section.steps && (
+                {/* Steps List */}
+                {/* {section?.steps && (
                       <ol className="space-y-2 ml-4 list-decimal list-inside">
                         {section.steps.map((step, idx) => (
                           <li key={idx} className="text-gray-700">
@@ -129,10 +127,10 @@ const Visa = () => {
                           </li>
                         ))}
                       </ol>
-                    )}
+                    )} */}
 
-                    {/* Details Table */}
-                    {section.details && (
+                {/* Details Table */}
+                {/* {section?.details && (
                       <div className="bg-gray-50 rounded p-4 mt-4">
                         {Object.entries(section.details).map(([key, value]) => (
                           <div
@@ -146,9 +144,9 @@ const Visa = () => {
                           </div>
                         ))}
                       </div>
-                    )}
-                  </div>
-                ))}
+                    )} */}
+                {/* </div>
+                ))} */}
               </div>
             </div>
           </div>

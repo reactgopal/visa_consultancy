@@ -11,7 +11,7 @@ module.exports = {
         brand: {
           DEFAULT: "#032b66",
           700: "#021a4a",
-          600: "#032b66"
+          600: "#032b66",
         },
       },
       maxWidth: {

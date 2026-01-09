@@ -1,10 +1,13 @@
-import React from "react";
 import VisaCategories from "../components/Visa/VisaCategories";
+import ChooseUs from "../components/ChooseUs";
+import TeamMembers from "../components/TeamMembers";
 
 function Home() {
   return (
-    <div>
+    <div className="overflow-hidden">
       <VisaCategories />
+      <ChooseUs />
+      <TeamMembers />
     </div>
   );
 }

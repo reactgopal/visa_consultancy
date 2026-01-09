@@ -1,67 +1,34 @@
-import { GraduationCap, Building2, Briefcase } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import axios from "axios";
 
-import visa1 from "../../images/cards/visa-1.jpg";
-import visa2 from "../../images/cards/visa-2.jpg";
-import visa3 from "../../images/cards/visa-3.jpg";
 import CategoriesData from "./CategoriesData";
-
-const visaData = [
-  {
-    title: "Student Visa",
-    image: visa1,
-    icon: GraduationCap,
-    points: [
-      "Nulla nulla erat, gravida at leo",
-      "Amet minim mollit no duis deserunt",
-      "Dolor do amet sint velit officia",
-    ],
-  },
-  {
-    title: "Residence Visa",
-    image: visa2,
-    icon: Building2,
-    overlay: true,
-    points: [
-      "Quisque tincidunt porta libero",
-      "Donec magna sem, consectetur",
-      "Pellentesque consequat dignissim velit",
-    ],
-  },
-  {
-    title: "Business Visa",
-    image: visa3,
-    icon: Briefcase,
-    points: [
-      "Aliquam molestie risus sit amet",
-      "Vitae varius quam consequat",
-      "Praesent in aliquam felis",
-    ],
-  },
-  {
-    title: "Business Visa",
-    image: visa3,
-    icon: Briefcase,
-    points: [
-      "Aliquam molestie risus sit amet",
-      "Vitae varius quam consequat",
-      "Praesent in aliquam felis",
-    ],
-  },
-  {
-    title: "Business Visa",
-    image: visa3,
-    icon: Briefcase,
-    points: [
-      "Aliquam molestie risus sit amet",
-      "Vitae varius quam consequat",
-      "Praesent in aliquam felis",
-    ],
-  },
-];
+import SectionTitle from "../Common/SectionTitle";
 
 const VisaCategories = () => {
+  const [visaCategory, setVisaCategory] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "http://192.168.100.11:8008/api/visa-category-list"
+      );
+      setVisaCategory(response.data?.data);
+      setLoading(false);
+    } catch (err) {
+      setError(err);
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <section className="relative py-16 px-4 sm:px-6 lg:px-8">
       <div className="visa-category-layer absolute inset-0"></div>
@@ -69,22 +36,18 @@ const VisaCategories = () => {
         {/* Heading */}
         <div className="text-center mb-12">
           <div className="text-center">
-            <p className="text-base font-semibold tracking-wide text-brand uppercase">
-              Visa Categories
-            </p>
-            <div className="mt-1 flex items-center justify-center gap-3">
-              <span className="h-px w-12 bg-brand"></span>
-
-              <span className="text-brand text-sm">★</span>
-
-              <span className="h-px w-12 bg-brand"></span>
-            </div>
+            <SectionTitle
+              title="Visa Categories"
+              subtitle={
+                <>
+                  Assisting you in fulfilling your eligibility{" "}
+                  <br className="hidden sm:block" />
+                  for immigrant registration.
+                </>
+              }
+              isCenter={true}
+            />
           </div>
-          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold text-brand">
-            Assisting you in fulfilling your eligibility{" "}
-            <br className="hidden sm:block" />
-            for immigrant registration.
-          </h2>
         </div>
 
         {/* Cards */}
@@ -95,16 +58,18 @@ const VisaCategories = () => {
           slidesPerView={3}
           loop={true}
           speed={1200}
-          autoplay={{ delay: 2500 }}
+          // autoplay={{ delay: 2500 }}
           breakpoints={{
             0: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
         >
-          {visaData.map((visa, index) => (
-            <SwiperSlide key={index}>
-              <CategoriesData visa={visa} />
+          {visaCategory.map((visaCategoryData, index) => (
+            <SwiperSlide key={visaCategoryData?.id}>
+              <Link to={`/visa/${visaCategoryData?.id}`}>
+                <CategoriesData visaCategory={visaCategoryData} />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

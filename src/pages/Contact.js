@@ -1,3 +1,4 @@
+import SectionTitle from "../components/Common/SectionTitle";
 import PageBanner from "../components/PageBanner/PageBanner";
 
 const Contact = () => {
@@ -10,16 +11,20 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* LEFT SIDE – INFO */}
           <div>
-            <span className="text-sm font-semibold text-brand uppercase tracking-wide">
-              Quick Contact
-            </span>
+            <div className="text-left">
+              <SectionTitle
+                title="Quick Contact"
+                subtitle={
+                  <>
+                    Have Questions ? <br />
+                    Don't Hesitate to Contact Us
+                  </>
+                }
+                isCenter={false}
+              />
+            </div>
 
-            <h2 className="mt-4 text-4xl font-bold text-brand leading-tight">
-              Have Questions? <br />
-              Don't Hesitate to Contact Us
-            </h2>
-
-            <p className="mt-6 text-gray-500 leading-relaxed max-w-lg">
+            <p className="mt-6 text-base font-medium text-gray-500 leading-relaxed max-w-lg">
               Sed gravida nisl a porta tincidunt. Integer aliquam nisi sit amet
               magna suscipit, fermentum mattis erat rutrum.
             </p>
@@ -66,15 +71,15 @@ const Contact = () => {
 
           {/* RIGHT SIDE – FORM */}
           <div>
-            <span className="text-sm font-semibold text-brand uppercase tracking-wide">
-              Let’s Connect
-            </span>
+            <div className="text-left">
+              <SectionTitle
+                title=" Let’s Connect"
+                subtitle="Send Your Message"
+                isCenter={false}
+              />
+            </div>
 
-            <h3 className="mt-4 text-3xl font-bold text-brand">
-              Send Your Message
-            </h3>
-
-            <p className="mt-4 text-gray-500 max-w-md">
+            <p className="mt-4 max-w-md text-base font-medium text-gray-500">
               Sed gravida nisl a porta tincidunt. Integer aliquam nisi sit amet
               magna suscipit.
             </p>
@@ -84,29 +89,29 @@ const Contact = () => {
                 <input
                   type="text"
                   placeholder="Name"
-                  className="w-full bg-gray-50 border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full bg-gray-50 border placeholder-brand border-gray-200 px-7 py-3 focus:outline-none focus:ring-1 focus:ring-brand"
                 />
                 <input
                   type="email"
                   placeholder="Email"
-                  className="w-full bg-gray-50 border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full bg-gray-50 border placeholder-brand border-gray-200 px-7 py-3 focus:outline-none focus:ring-1 focus:ring-brand"
                 />
                 <input
                   type="text"
                   placeholder="Phone"
-                  className="w-full bg-gray-50 border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full bg-gray-50 border placeholder-brand border-gray-200 px-7 py-3 focus:outline-none focus:ring-1 focus:ring-brand"
                 />
                 <input
                   type="text"
                   placeholder="Subject"
-                  className="w-full bg-gray-50 border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full bg-gray-50 border placeholder-brand border-gray-200 px-7 py-3 focus:outline-none focus:ring-1 focus:ring-brand"
                 />
               </div>
 
               <textarea
                 rows="6"
                 placeholder="Your message here"
-                className="w-full bg-gray-50 border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand"
+                className="w-full bg-gray-50 border placeholder-brand border-gray-200 px-7 py-3 focus:outline-none focus:ring-1 focus:ring-brand"
               ></textarea>
 
               <div className="flex items-center gap-2 text-sm text-gray-500">
