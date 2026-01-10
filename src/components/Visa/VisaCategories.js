@@ -65,7 +65,7 @@ const VisaCategories = () => {
             1024: { slidesPerView: 3 },
           }}
         >
-          {visaCategory.map((visaCategoryData, index) => (
+          {visaCategory?.map((visaCategoryData, index) => (
             <SwiperSlide key={visaCategoryData?.id}>
               <Link to={`/visa/${visaCategoryData?.id}`}>
                 <CategoriesData visaCategory={visaCategoryData} />

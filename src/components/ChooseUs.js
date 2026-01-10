@@ -70,7 +70,7 @@ const ChooseUs = () => {
                 {/* <div className="flex justify-start mt-4 hover:">
                   <ArrowRight />
                 </div> */}
-                <div className="  relative w-64 py-4 overflow-hidden cursor-pointer">
+                <div className="relative w-64 py-4 overflow-hidden cursor-pointer">
                   {/* Icon */}
                   <span
                     className="flex items-center text-gray-700 transition-all duration-300

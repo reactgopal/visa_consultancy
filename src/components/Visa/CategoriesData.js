@@ -35,26 +35,23 @@ const CategoriesData = (props) => {
         </h3>
 
         <p className="line-clamp-3 text-base text-gray-500 font-medium mb-4">
-          {visaCategory?.short_description}
+          {visaCategory?.short_description.slice(0, 200)}...
         </p>
 
         <ul className="space-y-2 mb-6 ">
-          {visaCategory.bullets.slice(0, 3).map((point, i) => (
+          {visaCategory.bullets.slice(0, 2).map((point, i) => (
             <li
               key={i}
-              className="flex items-start gap-2 text-gray-500 font-medium"
+              className=" flex items-start gap-2 text-gray-500 font-medium"
             >
               <span className="text-green-600 mt-1">✓</span>
-              {point}
+              {point.slice(0, 40)}...
             </li>
           ))}
         </ul>
-        <Link
-          to={`/visa/${visaCategory?.id}`}
-          className="text-base font-semibold text-slate-900 hover:underline flex items-center gap-1"
-        >
+        <button className="text-base font-semibold text-slate-900 hover:underline flex items-center gap-1">
           Read More →
-        </Link>
+        </button>
       </div>
     </div>
   );

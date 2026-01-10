@@ -16,6 +16,7 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/visa/:id" element={<Visa />} />
+        <Route path="/visa/subcategory/:id" element={<Visa />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Route>
