@@ -1,33 +1,14 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import axios from "axios";
 
 import CategoriesData from "./CategoriesData";
 import SectionTitle from "../Common/SectionTitle";
+import useCategories from "../../utils/useCategories";
 
 const VisaCategories = () => {
-  const [visaCategory, setVisaCategory] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        "http://192.168.100.11:8008/api/visa-category-list"
-      );
-      setVisaCategory(response.data?.data);
-      setLoading(false);
-    } catch (err) {
-      setError(err);
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const visaCategory = useCategories();
 
   return (
     <section className="relative py-16 px-4 sm:px-6 lg:px-8">
@@ -58,7 +39,7 @@ const VisaCategories = () => {
           slidesPerView={3}
           loop={true}
           speed={1200}
-          // autoplay={{ delay: 2500 }}
+          autoplay={{ delay: 2500 }}
           breakpoints={{
             0: { slidesPerView: 1 },
             768: { slidesPerView: 2 },

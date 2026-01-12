@@ -14,7 +14,7 @@ const Visa = () => {
   // console.log(randomId,"randomId")
 
   const isSubCategory = useMatch("/visa/subcategory/:id");
-  console.log(isSubCategory, "isSubCategory");
+
   const [visaDetails, setVisaDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -57,6 +57,8 @@ const Visa = () => {
                 <h1 className="text-4xl font-bold text-brand mb-3">
                   {visaDetails?.title}
                 </h1>
+                <div className="h-[2px] w-20 bg-brand mb-5"></div>
+
                 <p
                   className="text-lg text-gray-500 font-medium"
                   dangerouslySetInnerHTML={{
@@ -155,10 +157,10 @@ const Visa = () => {
                           to={`/visa/subcategory/${section?.id}`}
                           className="group flex items-center text-lg gap-2 border-b border-brand-600 group-hover:border-brand transition"
                         >
-                          <span className="text-lg text-brand-600 font-semibold pb-3">
+                          <span className="text-lg text-brand-600 font-semibold pb-6">
                             {index + 1}.
                           </span>
-                          <div className="flex items-center justify-between flex-1 pb-3">
+                          <div className="flex items-center justify-between flex-1 pb-6">
                             <p className="font-medium text-brand-600 group-hover:text-brand transition">
                               {section?.title}
                             </p>

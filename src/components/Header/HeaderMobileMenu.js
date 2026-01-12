@@ -48,23 +48,23 @@ const HeaderMobileMenu = ({ openMenu, onClose, menuItems, setOpenMenu }) => {
         {/* Menu */}
         <ul className="px-6 space-y-4 text-gray-700 font-medium">
           {menuItems.map((item) => (
-            <li key={item.title}>
+            <li key={item.title} className="capitalize">
               {/* Parent Item */}
               <div
                 className="flex items-center justify-between py-3 border-b border-gray-100 cursor-pointer"
                 onClick={() =>
-                  item.submenu ? toggleSubmenu(item.title) : onClose()
+                  item.sub_category ? toggleSubmenu(item.title) : onClose()
                 }
               >
                 <Link
-                  to={item.path}
-                  onClick={!item.submenu ? onClose : undefined}
+                  to={`/visa/${item?.id}`}
+                  onClick={!item.sub_category ? onClose : undefined}
                   className="flex-1 hover:text-blue-600 transition"
                 >
                   {item.title}
                 </Link>
 
-                {item.submenu && (
+                {item.sub_category && (
                   <span
                     className={`ml-2 transition-transform duration-200
                     ${openSubmenu === item.title ? "rotate-180" : ""}`}
@@ -75,7 +75,7 @@ const HeaderMobileMenu = ({ openMenu, onClose, menuItems, setOpenMenu }) => {
               </div>
 
               {/* Submenu */}
-              {item.submenu && (
+              {item.sub_category && (
                 <ul
                   className={`pl-4 overflow-hidden transition-all duration-300
                   ${
@@ -84,10 +84,10 @@ const HeaderMobileMenu = ({ openMenu, onClose, menuItems, setOpenMenu }) => {
                       : "max-h-0 opacity-0"
                   }`}
                 >
-                  {item.submenu.map((subItem) => (
+                  {item.sub_category.map((subItem) => (
                     <li key={subItem.title}>
                       <Link
-                        to={subItem.path}
+                        to={`/visa/subcategory/${subItem.id}`}
                         onClick={onClose}
                         className="block py-2 text-sm text-gray-600
                         hover:text-blue-600 hover:pl-2

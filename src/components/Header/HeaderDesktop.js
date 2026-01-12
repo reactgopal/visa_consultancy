@@ -7,15 +7,15 @@ const HeaderDesktop = ({ menuItems }) => {
       <nav className="hidden xl:block">
         <ul className="flex items-center gap-8 font-medium text-blue-900">
           {menuItems.map((item) => (
-            <li key={item.title} className="relative py-7 group">
+            <li key={item.title} className="relative py-7 group capitalize">
               <Link
-                to={item.path}
+                to={`/visa/${item?.id}`}
                 className="hover:text-blue-600 transition-colors text-base"
               >
                 {item.title}
               </Link>
               {/* submenu   */}
-              {item.submenu && (
+              {item?.sub_category.length > 0 && (
                 <ul
                   className="
                     absolute left-0 top-full mt-2 w-56
@@ -27,10 +27,10 @@ const HeaderDesktop = ({ menuItems }) => {
                     z-50
                   "
                 >
-                  {item.submenu.map((subItem) => (
+                  {item?.sub_category.map((subItem) => (
                     <li key={subItem.title}>
                       <Link
-                        to={subItem.path}
+                        to={`/visa/subcategory/${subItem.id}`}
                         className="
                           block px-5 py-3 text-sm text-gray-700
                           hover:bg-blue-50 hover:text-blue-600

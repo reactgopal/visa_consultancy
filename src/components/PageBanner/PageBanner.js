@@ -11,7 +11,9 @@ const PageBanner = ({ title }) => {
 
       {/* Content - Top Layer */}
       <div className="relative z-40 max-w-7xl mx-auto text-center">
-        <h1 className="text-4xl  md:text-6xl font-bold text-white">{title}</h1>
+        <h1 className="text-4xl  md:text-6xl font-bold text-white capitalize">
+          {title}
+        </h1>
         <ul className="inline-flex items-center justify-center text-white border border-white/20 rounded-md mt-9 py-4 px-6 bg-white/5 backdrop-blur-sm">
           <li>
             <Link to="/" className="text-[18px] hover:underline">

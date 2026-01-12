@@ -2,9 +2,13 @@ import { useState } from "react";
 import HeaderDesktop from "./HeaderDesktop";
 import HeaderMobileMenu from "./HeaderMobileMenu";
 import { Link } from "react-router-dom";
+import useCategories from "../../utils/useCategories";
 
 const HeaderLayout = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const visaCategories = useCategories();
+
+  console.log(visaCategories, "visa categories");
 
   const menuItems = [
     {
@@ -36,6 +40,7 @@ const HeaderLayout = () => {
         { title: "Coaching 3", path: "/coaching-3" },
       ],
     },
+    { title: "Visa", path: "/visa" },
     { title: "Countries", path: "/countries" },
     { title: "Blog", path: "/blog" },
     { title: "Contact Us", path: "/contact" },
@@ -62,7 +67,7 @@ const HeaderLayout = () => {
           </button>
 
           {/* Desktop */}
-          <HeaderDesktop menuItems={menuItems} />
+          <HeaderDesktop menuItems={visaCategories} />
         </div>
       </div>
 
@@ -70,7 +75,7 @@ const HeaderLayout = () => {
       <HeaderMobileMenu
         openMenu={openMenu}
         setOpenMenu={setOpenMenu}
-        menuItems={menuItems}
+        menuItems={visaCategories}
       />
     </header>
   );
