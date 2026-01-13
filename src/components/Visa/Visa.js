@@ -7,8 +7,14 @@ import PageBanner from "../PageBanner/PageBanner";
 import Loaders from "../Common/Loader";
 import NotFound from "../../pages/NotFound";
 
+import {
+  MAIN_CATEGORY_DETAIL_API,
+  SUB_CATEGORY_DETAIL_API,
+} from "../../utils/constants";
+
 const Visa = () => {
   const { id } = useParams();
+
   // const salt = Math.random().toString(36).substring(2, 8);
   // const randomId = btoa(id + "|" + salt);
   // console.log(randomId,"randomId")
@@ -22,8 +28,8 @@ const Visa = () => {
   const fetchData = async () => {
     try {
       const url = isSubCategory
-        ? `http://192.168.100.11:8008/api/visa-sub-category-details/${id}`
-        : `http://192.168.100.11:8008/api/visa-category-details/${id}`;
+        ? SUB_CATEGORY_DETAIL_API + `/${id}`
+        : MAIN_CATEGORY_DETAIL_API + `/${id}`;
 
       const response = await axios.get(url);
 
@@ -54,7 +60,7 @@ const Visa = () => {
             <div className="bg-white p-6 rounded-lg  ">
               {/* Header */}
               <div className="mb-8">
-                <h1 className="text-4xl font-bold text-brand mb-3">
+                <h1 className="text-4xl font-bold text-brand mb-3 capitalize">
                   {visaDetails?.title}
                 </h1>
                 <div className="h-[2px] w-20 bg-brand mb-5"></div>
@@ -150,17 +156,17 @@ const Visa = () => {
                       Most Common Types of {visaDetails?.title}
                     </h2>
 
-                    <div className="space-y-6">
+                    <div className="space-y-3">
                       {visaDetails?.sub_category?.map((section, index) => (
                         <Link
                           key={section?.id}
                           to={`/visa/subcategory/${section?.id}`}
                           className="group flex items-center text-lg gap-2 border-b border-brand-600 group-hover:border-brand transition"
                         >
-                          <span className="text-lg text-brand-600 font-semibold pb-6">
+                          <span className="text-lg text-brand-600 font-semibold pb-3">
                             {index + 1}.
                           </span>
-                          <div className="flex items-center justify-between flex-1 pb-6">
+                          <div className="flex items-center justify-between flex-1 pb-3">
                             <p className="font-medium text-brand-600 group-hover:text-brand transition">
                               {section?.title}
                             </p>

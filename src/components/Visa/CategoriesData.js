@@ -27,7 +27,7 @@ const CategoriesData = ({ visaCategory }) => {
           {visaCategory?.title}
         </h3>
 
-        <p className="line-clamp-3 text-base text-gray-500 font-medium mb-4">
+        <p className="line-clamp-3 text-base text-gray-500 font-medium mb-4 min-h-[72px]">
           {visaCategory?.short_description.slice(0, 200)}...
         </p>
 

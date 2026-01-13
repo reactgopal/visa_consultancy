@@ -8,44 +8,6 @@ const HeaderLayout = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const visaCategories = useCategories();
 
-  console.log(visaCategories, "visa categories");
-
-  const menuItems = [
-    {
-      title: "Home",
-      path: "/",
-      submenu: [
-        { title: "Home", path: "/" },
-        { title: "Home 2", path: "/home-2" },
-        { title: "Home 3", path: "/home-3" },
-        { title: "Home 4", path: "/home-4" },
-        { title: "Home 5", path: "/home-5" },
-      ],
-    },
-    {
-      title: "About",
-      path: "/about",
-      submenu: [
-        { title: "About", path: "/about" },
-        { title: "About 2", path: "/about-2" },
-        { title: "About 3", path: "/about-3" },
-      ],
-    },
-    {
-      title: "Coaching",
-      path: "/coaching",
-      submenu: [
-        { title: "Coaching", path: "/coaching" },
-        { title: "Coaching 2", path: "/coaching-2" },
-        { title: "Coaching 3", path: "/coaching-3" },
-      ],
-    },
-    { title: "Visa", path: "/visa" },
-    { title: "Countries", path: "/countries" },
-    { title: "Blog", path: "/blog" },
-    { title: "Contact Us", path: "/contact" },
-  ];
-
   return (
     <header className="bg-gray-100 relative">
       <div className="max-w-8xl mx-auto px-6">
