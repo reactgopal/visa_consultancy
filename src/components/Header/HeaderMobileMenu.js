@@ -46,30 +46,36 @@ const HeaderMobileMenu = ({ openMenu, onClose, menuItems, setOpenMenu }) => {
         </div>
 
         {/* Menu */}
-        <ul className="px-6 space-y-4 text-gray-700 font-medium">
-          {menuItems.map((item) => (
+        <ul className="px-6 space-y-4  text-blue-900 font-medium">
+          {menuItems?.map((item) => (
             <li key={item.title} className="capitalize">
               {/* Parent Item */}
               <div
                 className="flex items-center justify-between py-3 border-b border-gray-100 cursor-pointer"
                 onClick={() =>
-                  item.sub_category ? toggleSubmenu(item.title) : onClose()
+                  item.sub_category
+                    ? toggleSubmenu(item.title)
+                    : setOpenMenu(false)
                 }
               >
                 <Link
-                  to={`/visa/${item?.id}`}
-                  onClick={!item.sub_category ? onClose : undefined}
+                  to={item.id === "others" ? "/others" : `/visa/${item?.id}`}
+                  onClick={() => setOpenMenu(false)}
                   className="flex-1 hover:text-blue-600 transition"
                 >
                   {item.title}
                 </Link>
 
-                {item.sub_category && (
+                {item?.sub_category?.length > 0 && (
                   <span
                     className={`ml-2 transition-transform duration-200
                     ${openSubmenu === item.title ? "rotate-180" : ""}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleSubmenu(item.title);
+                    }}
                   >
-                    ▾
+                    🔽
                   </span>
                 )}
               </div>
@@ -77,21 +83,29 @@ const HeaderMobileMenu = ({ openMenu, onClose, menuItems, setOpenMenu }) => {
               {/* Submenu */}
               {item.sub_category && (
                 <ul
-                  className={`pl-4 overflow-hidden transition-all duration-300
-                  ${
-                    openSubmenu === item.title
-                      ? "max-h-96 opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
+                  className={`pl-4 overflow-hidden transition-all duration-300 bg-brand text-white 
+    ${
+      openSubmenu === item.title ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+    }`}
                 >
-                  {item.sub_category.map((subItem) => (
-                    <li key={subItem.title}>
+                  {item?.sub_category.map((subItem) => (
+                    <li key={subItem.id} className="">
                       <Link
-                        to={`/visa/subcategory/${subItem.id}`}
-                        onClick={onClose}
-                        className="block py-2 text-sm text-gray-600
-                        hover:text-blue-600 hover:pl-2
-                        transition-all duration-200"
+                        to={
+                          item.id === "others"
+                            ? `/others/${subItem.id}`
+                            : `/visa/subcategory/${subItem.id}`
+                        }
+                        onClick={() => setOpenMenu(false)}
+                        className="relative block py-2 
+                                  transition-all duration-200
+                                  hover:text-blue-600 hover:pl-2
+                                  after:content-['']
+                                  after:absolute after:left-0 after:bottom-0
+                                  after:h-[2px] after:w-0
+                                  after:bg-blue-600
+                                  after:transition-all after:duration-300 after:ease-in-out
+                                  hover:after:w-full"
                       >
                         {subItem.title}
                       </Link>

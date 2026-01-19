@@ -9,9 +9,9 @@ const HeaderLayout = () => {
   const visaCategories = useCategories();
 
   return (
-    <header className="bg-gray-100 relative">
+    <header className="sticky top-0 z-50 bg-gray-100">
       <div className="max-w-8xl mx-auto px-6">
-        <div className="flex items-center justify-between h-20 md:h-24 lg:h-28">
+        <div className=" flex items-center justify-between h-20 md:h-24 lg:h-24">
           {/* Logo */}
           <Link to="/">
             <img

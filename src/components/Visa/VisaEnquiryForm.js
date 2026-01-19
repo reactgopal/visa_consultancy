@@ -2,10 +2,11 @@ import { useRef, useState } from "react";
 import useCategories from "../../utils/useCategories";
 import { checkValidData } from "../../utils/validate";
 import axios from "axios";
+import { ENQUIRY_API } from "../../utils/constants";
 
 const VisaEnquiryForm = () => {
   const categoriesList = useCategories();
-  
+
   const [visaType, setVisaType] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -22,7 +23,11 @@ const VisaEnquiryForm = () => {
     setSuccessMessage(null);
 
     // Validate form data
-    const isValid = checkValidData(email.current.value, phone.current.value);
+    const isValid = checkValidData(
+      name.current.value,
+      email.current.value,
+      phone.current.value
+    );
     if (isValid) {
       setErrorMessage(isValid);
       return;
@@ -31,12 +36,6 @@ const VisaEnquiryForm = () => {
     // Check if visa type is selected
     if (!visaType) {
       setErrorMessage("Please select a visa type");
-      return;
-    }
-
-    // Check if name is filled
-    if (!name.current.value.trim()) {
-      setErrorMessage("Please enter your name");
       return;
     }
 
@@ -53,10 +52,7 @@ const VisaEnquiryForm = () => {
       };
 
       // Call API endpoint
-      const response = await axios.post(
-        "http://192.168.100.11:8008/api/enquiry-add",
-        formData
-      );
+      const response = await axios.post(ENQUIRY_API, formData);
 
       // Handle success
       if (response.status === 200 || response.status === 201) {

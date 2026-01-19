@@ -1,4 +1,6 @@
-export const checkValidData = (email, phone) => {
+export const checkValidData = (name, email, phone) => {
+  if (!name || name.trim() === "") return "Please Enter your name";
+
   const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
     email
   );

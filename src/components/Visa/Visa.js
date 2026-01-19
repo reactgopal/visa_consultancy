@@ -64,7 +64,6 @@ const Visa = () => {
                   {visaDetails?.title}
                 </h1>
                 <div className="h-[2px] w-20 bg-brand mb-5"></div>
-
                 <p
                   className="text-lg text-gray-500 font-medium"
                   dangerouslySetInnerHTML={{
@@ -180,8 +179,8 @@ const Visa = () => {
                   </div>
                 )}
 
-                {visaDetails?.table_of_content &&
-                  visaDetails?.table_of_content.map((content, index) => (
+                {visaDetails?.main_table_of_content?.length > 0 &&
+                  visaDetails?.main_table_of_content.map((content, index) => (
                     <div
                       key={content?.id}
                       className="mb-12"
@@ -190,11 +189,14 @@ const Visa = () => {
                       <h2 className="text-2xl font-bold text-brand mb-5">
                         {content?.title}
                       </h2>
-                      <p className="text-base text-gray-500 font-medium mb-4">
-                        {content?.description}
-                      </p>
+                      <p
+                        className="text-base text-gray-500 font-medium mb-4"
+                        dangerouslySetInnerHTML={{
+                          __html: content?.description,
+                        }}
+                      ></p>
                       {/* Points List */}
-                      {content?.bullets && (
+                      {/* {content?.bullets && (
                         <ul className="space-y-2 list-decimal list-inside">
                           {content?.bullets.map((bullet, i) => (
                             <li
@@ -206,12 +208,12 @@ const Visa = () => {
                             </li>
                           ))}
                         </ul>
-                      )}
+                      )} */}
                     </div>
                   ))}
 
-                {visaDetails?.main_table_of_content?.length > 0 &&
-                  visaDetails?.main_table_of_content.map((content, index) => (
+                {visaDetails?.table_of_content &&
+                  visaDetails?.table_of_content.map((content, index) => (
                     <div
                       key={content?.id}
                       className="mb-12"
@@ -220,8 +222,13 @@ const Visa = () => {
                       <h2 className="text-2xl font-bold text-brand mb-5">
                         {content?.title}
                       </h2>
-                      <p className="text-base text-gray-500 font-medium mb-4">
-                        {content?.description}
+                      <p
+                        className="text-base text-gray-500 font-medium mb-4"
+                        dangerouslySetInnerHTML={{
+                          __html: content?.description,
+                        }}
+                      >
+                        {/* {content?.description} */}
                       </p>
                       {/* Points List */}
                       {content?.bullets && (

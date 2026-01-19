@@ -8,7 +8,8 @@ const Breadcrumb = () => {
 
   let category = null;
   let subCategory = null;
-  
+  let others = null;
+
   // CASE 1: Main Category Page → /visa/2
   if (
     location.pathname.startsWith("/visa/") &&
@@ -31,6 +32,10 @@ const Breadcrumb = () => {
     });
   }
 
+  // CASE 3: IN .
+  if (location.pathname.includes("appointment")) {
+    others = "Book An Appointment";
+  }
 
   return (
     <ul className="inline-flex items-center justify-center text-white border border-white/20 rounded-md mt-9 py-4 px-6 bg-white/5 backdrop-blur-sm">
@@ -93,6 +98,28 @@ const Breadcrumb = () => {
             <span className="text-[18px] text-white/90">
               {subCategory.title}
             </span>
+          </li>
+        </>
+      )}
+      {others && (
+        <>
+          <li className="px-3 text-white/70">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 inline-block"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </li>
+
+          <li>
+            <span className="text-[18px] text-white/90">{others}</span>
           </li>
         </>
       )}
