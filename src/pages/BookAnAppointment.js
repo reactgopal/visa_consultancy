@@ -6,8 +6,8 @@ import {
   APPOINTMENT_TIME_API,
   CONSULTATION_METHOD_API,
 } from "../utils/constants";
-import PageBanner from "./PageBanner/PageBanner";
-import SectionTitle from "./Common/SectionTitle";
+import PageBanner from "../components/PageBanner/PageBanner";
+import SectionTitle from "../components/Common/SectionTitle";
 
 const BookAnAppointment = () => {
   const [listOfPreferredTimes, setListOfPreferredTimes] = useState([]);

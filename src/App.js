@@ -8,7 +8,7 @@ import Visa from "./components/Visa/Visa";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Contact from "./pages/Contact";
-import BookAnAppointment from "./components/BookAnAppointment";
+import BookAnAppointment from "./pages/BookAnAppointment";
 import ScrollToTop from "./utils/useScrollTop";
 
 function App() {
