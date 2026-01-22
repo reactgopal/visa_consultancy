@@ -16,3 +16,8 @@ export const APPOINTMENT_TIME_API =
 
 export const CONSULTATION_METHOD_API =
   "http://192.168.100.11:8008/api/consultation-method";
+
+export const COMPANY_ADVANTAGES_API =
+  "http://192.168.100.11:8008/api/company-advantages";
+
+export const TEAM_MEMBERS_API = "http://192.168.100.11:8008/api/our-teams";

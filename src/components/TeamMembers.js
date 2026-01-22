@@ -1,9 +1,10 @@
-import SectionTitle from "./Common/SectionTitle";
+import { useEffect, useState } from "react";
+import { motion } from "motion/react";
+import axios from "axios";
 
-import choose1 from "../images/team/team-1.jpg";
-import choose2 from "../images/team/team-2.jpg";
-import choose3 from "../images/team/team-3.jpg";
-import choose4 from "../images/team/team-4.jpg";
+import SectionTitle from "./Common/SectionTitle";
+import { cardVariants, containerVariants } from "../utils/animation";
+import { TEAM_MEMBERS_API } from "../utils/constants";
 
 import {
   FaFacebookF,
@@ -12,34 +13,16 @@ import {
   FaShareAlt,
 } from "react-icons/fa";
 
-const membersData = [
-  {
-    id: 1,
-    name: "John Doe",
-    role: "Regional Manager",
-    image: choose1,
-  },
-  {
-    id: 2,
-    name: "Jane Cooper",
-    role: "Medical Assistant",
-    image: choose2,
-  },
-  {
-    id: 3,
-    name: "Esther Howard",
-    role: "President of Sales",
-    image: choose3,
-  },
-  {
-    id: 4,
-    name: "Jenny Wilson",
-    role: "Marketing Coordinator",
-    image: choose4,
-  },
-];
-
 const TeamMembers = () => {
+  const [teamList, setTeamList] = useState(null);
+
+  const getTeamData = async () => {
+    const response = await axios.get(TEAM_MEMBERS_API);
+    setTeamList(response.data.data);
+  };
+  useEffect(() => {
+    getTeamData();
+  }, []);
   return (
     <>
       <section className="relative py-16 px-4 sm:px-6 lg:px-8 ">
@@ -57,12 +40,19 @@ const TeamMembers = () => {
             </div>
           </div>
           {/* cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            {membersData.map((e) => {
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"
+          >
+            {teamList?.map((e) => {
               return (
-                <div
+                <motion.div
                   key={e?.id}
-                  className="relative group p-4 mx-4 sm:m-0 text-center bg-white rounded-full overflow-hidden transition-all duration-500"
+                  variants={cardVariants}
+                  className="relative group p-4 mx-4 sm:m-0 text-center bg-white rounded-full overflow-hidden "
                 >
                   {/* Hover Fill Layer */}
                   <span className="absolute inset-x-0 top-0 h-0 bg-brand-600 transition-all duration-500 ease-in-out group-hover:h-full z-0 rounded-full" />
@@ -113,14 +103,14 @@ const TeamMembers = () => {
                       </h3>
 
                       <p className="text-sm sm:text-base font-medium text-gray-500 transition-colors duration-500 group-hover:text-white/90">
-                        {e?.role}
+                        {e?.designation}
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
     </>

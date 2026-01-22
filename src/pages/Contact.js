@@ -23,7 +23,6 @@ const Contact = () => {
                 isCenter={false}
               />
             </div>
-          
 
             <p className="mt-6 text-base font-medium text-gray-500 leading-relaxed max-w-lg">
               Sed gravida nisl a porta tincidunt. Integer aliquam nisi sit amet

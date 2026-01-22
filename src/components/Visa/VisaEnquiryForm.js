@@ -5,7 +5,7 @@ import axios from "axios";
 import { ENQUIRY_API } from "../../utils/constants";
 
 const VisaEnquiryForm = () => {
-  const categoriesList = useCategories();
+  const {visaCategory} = useCategories();
 
   const [visaType, setVisaType] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
@@ -127,7 +127,7 @@ const VisaEnquiryForm = () => {
             <option value="" disabled>
               Select visa type
             </option>
-            {categoriesList.map((category) => (
+            {visaCategory.map((category) => (
               <option
                 key={category.id}
                 className="capitalize"

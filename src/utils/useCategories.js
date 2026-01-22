@@ -21,7 +21,7 @@ const useCategories = () => {
     }
   };
 
-  return visaCategory;
+  return { visaCategory, loading, error };
 };
 
 export default useCategories;

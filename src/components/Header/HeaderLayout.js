@@ -6,7 +6,7 @@ import useCategories from "../../utils/useCategories";
 
 const HeaderLayout = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const visaCategories = useCategories();
+  const { visaCategory, loading } = useCategories();
 
   return (
     <header className="sticky top-0 z-50 bg-gray-100">
@@ -29,7 +29,7 @@ const HeaderLayout = () => {
           </button>
 
           {/* Desktop */}
-          <HeaderDesktop menuItems={visaCategories} />
+          <HeaderDesktop menuItems={visaCategory} />
         </div>
       </div>
 
@@ -37,7 +37,7 @@ const HeaderLayout = () => {
       <HeaderMobileMenu
         openMenu={openMenu}
         setOpenMenu={setOpenMenu}
-        menuItems={visaCategories}
+        menuItems={visaCategory}
       />
     </header>
   );

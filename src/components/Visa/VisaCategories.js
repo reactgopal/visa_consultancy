@@ -6,9 +6,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import CategoriesData from "./CategoriesData";
 import SectionTitle from "../Common/SectionTitle";
 import useCategories from "../../utils/useCategories";
+import Shimmer from "../Common/Shimmer";
 
 const VisaCategories = () => {
-  const visaCategory = useCategories();
+  const { visaCategory, loading } = useCategories();
+  if (loading) return <Shimmer />;
 
   return (
     <section className="relative py-16 px-4 sm:px-6 lg:px-8">

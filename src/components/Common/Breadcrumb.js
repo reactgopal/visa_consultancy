@@ -4,7 +4,7 @@ import useCategories from "../../utils/useCategories";
 const Breadcrumb = () => {
   const { id } = useParams();
   const location = useLocation();
-  const categories = useCategories();
+  const {visaCategory: categories} = useCategories();
 
   let category = null;
   let subCategory = null;

@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 import Breadcrumb from "../Common/Breadcrumb";
 
 const PageBanner = ({ title }) => {
@@ -10,13 +12,26 @@ const PageBanner = ({ title }) => {
       <div className="banner-bg-layer absolute z-30" />
 
       {/* Content - Top Layer */}
-      <div className="relative z-40 max-w-7xl mx-auto text-center">
-        <h1 className="text-4xl  md:text-6xl font-bold text-white capitalize">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="relative z-40 max-w-7xl mx-auto text-center"
+      >
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-6xl font-bold text-white capitalize"
+        >
           {title}
-        </h1>
+        </motion.h1>
+
         {/* Breadcrumb */}
         <Breadcrumb />
-      </div>
+      </motion.div>
     </section>
   );
 };

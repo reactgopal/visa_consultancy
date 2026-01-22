@@ -1,6 +1,7 @@
+import { motion } from "motion/react";
 const CategoriesData = ({ visaCategory }) => {
   return (
-    <div className="rounded-2xl shadow-md hover:shadow-md overflow-hidden mb-3 h-full flex flex-col">
+    <motion.div className="rounded-2xl shadow-md hover:shadow-md overflow-hidden mb-3 h-full flex flex-col">
       {/* Image */}
       <div className="relative h-52 shrink-0">
         <div className="relative h-full w-full overflow-hidden group">
@@ -44,7 +45,7 @@ const CategoriesData = ({ visaCategory }) => {
           Read More →
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

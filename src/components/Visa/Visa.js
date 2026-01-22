@@ -1,4 +1,5 @@
 import { useParams, useMatch, Link } from "react-router-dom";
+import { motion } from "motion/react";
 
 // Components
 import VisaEnquiryForm from "./VisaEnquiryForm";
@@ -32,10 +33,22 @@ const Visa = () => {
           <div className="w-full lg:w-9/12">
             <div className="bg-white p-6 rounded-lg">
               {/* Header Section */}
-              <div className="mb-8">
-                <h1 className="text-4xl font-bold text-brand mb-3 capitalize">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                viewport={{ once: true }}
+                className="mb-8"
+              >
+                <motion.h1
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                  className="text-4xl font-bold text-brand mb-3 capitalize"
+                >
                   {visaDetails?.title}
-                </h1>
+                </motion.h1>
                 <div className="h-[2px] w-20 bg-brand mb-5"></div>
                 <p
                   className="text-lg text-gray-500 font-medium"
@@ -51,7 +64,7 @@ const Visa = () => {
                     />
                   </div>
                 )}
-              </div>
+              </motion.div>
 
               {/* Content Sections */}
               <div className="space-y-8">

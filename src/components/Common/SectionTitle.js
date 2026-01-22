@@ -1,6 +1,13 @@
+import { motion } from "motion/react";
+
 const SectionTitle = ({ title, subtitle, isCenter }) => {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 40 }}
+      viewport={{ once: true }}
+    >
       <p className="text-base font-semibold tracking-wide text-brand uppercase">
         {title}
       </p>
@@ -18,7 +25,7 @@ const SectionTitle = ({ title, subtitle, isCenter }) => {
       <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold text-brand">
         {subtitle}
       </h2>
-    </>
+    </motion.div>
   );
 };
 export default SectionTitle;
